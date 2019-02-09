@@ -1,46 +1,129 @@
 "use strict"; // activation du mode strict
 (function() {
 	// ---------------------------VARIABLES--------------------------
+	var screenWidth = document.documentElement.offsetWidth;
+	var audio0 = document.querySelector(".audio_0");
 	var box = document.querySelector(".box");
+	var imageBox = document.querySelector(".image_box");
 	var description = document.querySelector(".description");
-	var membre;
-	var membreObject = {"epaule" : epaule, "bras" : bras, "main" : main, "jambe" : jambe, "genou" : genou, "pied" : pied}
-	var membreTab = [epaule, bras, main, jambe, genou, pied];
-	var membreStr = ["epaule", "bras", "main", "jambe", "genou", "pied"];
 
 	// --------------------------FONCTIONS----------------------------
 	function populateBox() {
-		for(let i=0; i<6; i++) {
-			description.innerHTML += '<div class="box class_' + membreStr[i] + '"><h2 class="title_2">' + membreTab[i].titre + '</h2><div class="text"><p>' + membreTab[i].definition + '</p></div></div>';
+		for(let i = 0, len = bodyMembers.length; i < len; i++) {
+
+			imageBox.innerHTML += '\
+				<div class="bouton" data-member-name="' + bodyMembers[i].name + '"></div>';
+
+			description.innerHTML += '\
+				<div class="box" data-member-name="' + bodyMembers[i].name + '">\
+					<h2 class="title_2">' +bodyMembers[i].titre + '</h2>\
+					<div class="text">\
+						<p>' + bodyMembers[i].definition + '</p>\
+					</div>\
+				</div>';
 		}
-
 	}
 
-	function mouseInFunction() {
-		membre = this.classList[1];
-		$("." + membre).addClass("selected");
-		$(".class_" + membre).addClass("selected");
-		/*$("." + membre).addClass("selected");*/
+	function boxOver() {
+		var membre = this.getAttribute("data-member-name");
+		var box = $(".box");
+		var toSelect = box.filter("[data-member-name='" + membre + "']");
+
+		$(this).addClass("selected");
+		toSelect.addClass("selected");
 	}
 
-	function mouseOutFunction() { // fonction quand la souris sort du bouton
-		membre = this.classList[1];
-		$("." + membre).removeClass("selected");
-		$(".class_" + membre).removeClass("selected");
+	function boxOut() {
+		var membre = this.getAttribute("data-member-name");
+		var box = $(".box");
+		var toSelect = box.filter("[data-member-name='" + membre + "']");
+
+		$(this).removeClass("selected");
+		toSelect.removeClass("selected");
 	}
 
-	function mouseClickFunction() {
-		$(".box:not(.selected) > .text").fadeOut();
+	function boxClick(e) {
+		var membre = this.getAttribute("data-member-name");
+		var box = $(".box");
+		var toSelect = box.filter("[data-member-name='" + membre + "']");
+		$(".instructions").css("display", "none");
 		$(".bouton").removeClass("selected");
-		$(".box").removeClass("selected");
-		membre = this.classList[1]; 
-		//description.innerHTML = '<div class="box"><h2 class="title_2">' + membreObject[membre].titre + '</h2><div><p>' + membreObject[membre].definition + '</p></div></div>';
-		$("." + membre).addClass("selected");
-		$(".class_" + membre).addClass("selected");
-		$(".selected > .text").fadeIn();
+		box.removeClass("selected");
+		$(this).addClass("selected");
+		toSelect.addClass("selected");
+	
+		e.preventDefault();
+		e.stopPropagation();
+	}
+
+	function boxReset() {
+		if(screenWidth < 768) {
+			$(".instructions").css("display", "block");
+			$(".bouton").removeClass("selected");
+			$(".box").removeClass("selected");
+		} else {
+			$(".instructions").css("display", "none");
+			
+		}
+		
 	}
 	// ------------------------------ APPEL DES FONCTIONS-------------------------
 
+	function initAudioVolumeManager() {
+		if(audio0.paused === false) {
+			audioVolumeUpdate();
+			return;
+		}
+
+		audio0.onplay = function() {
+			audioVolumeUpdate();
+		};
+	}
+
+	function audioVolumeUpdate() {
+		audio0.volume =  parseFloat(audio0.getAttribute("volume"));
+	}
+
+	function isMobile() {
+		return !!navigator.userAgent.match(/mobile/i);
+	}
+
 	populateBox();
-	$(".bouton").click(mouseClickFunction);
+	initAudioVolumeManager();
+
+	/*
+	if( isMobile() ) {
+		$(".bouton").click(boxClick);
+	} else {
+		$(".bouton").hover(boxOver, boxOut);
+	}*/
+
+	$(".bouton").click(function(e) {
+		if(screenWidth < 768) {
+			boxClick.bind(this)(e);
+		}
+	});
+
+	$(window.document).click(function(e) {
+		boxReset();
+	});
+
+	$(".bouton").hover(function() {
+		if(screenWidth >= 768) {
+			boxOver.bind(this)();
+		}
+	}, function() {
+		if(screenWidth >= 768) {
+			boxOut.bind(this)();
+		}
+	})
+
+	window.addEventListener("resize", function(e) {
+		screenWidth = document.documentElement.offsetWidth;
+
+		if(screenWidth >= 768) {
+			boxReset();
+		}
+	});
+	
 })()

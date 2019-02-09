@@ -4,16 +4,18 @@
 
 body {
 	font-family: 'Arvo', serif;
+	background-image: url("../images/background_mobile.gif");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 55%;
 }
 
 .container {
-	margin: 0 10px;
 }
 
 .content {
 	display: flex;
 	justify-content: center;
-	margin: 0 10px;
 }
 
 
@@ -26,8 +28,10 @@ body {
 
 .image_box {
 	background-image: url("../images/corps.png");
-	width: 139px;
-	height: 498px;
+    background-repeat: no-repeat;
+    margin-left: 20px;
+    padding-right: 99px;
+    height: 498px;
 }
 
 .bouton {
@@ -36,90 +40,106 @@ body {
 	width: 50px;
 	border-radius: 100%;
 	position: relative;
+	cursor: pointer;
 }
 
 .selected {
 	display: block;
 }
 
+.box {
+	height: 470px;
+	padding: 10px;
+}
+
 .box:not(.selected) {
 	display: none;
+}
+
+.box:not(.selected).instructions {
+	display: block;
 }
 
 .bouton.selected {
 	background: rgba(255, 0, 0, 0.7);
 }
 
-.epaule {
+.bouton[data-member-name="epaule"] {
 	top: 17%;
 }
 
-.bras {
+.bouton[data-member-name="bras"] {
 	top: 26%;
-	left: 70%;
+	left: 200%;
 }
 
-.main {
+.bouton[data-member-name="main"] {
 	top: 24%;
-	left: -6%;
+	left: -20%;
 }
 
-.jambe {
-	top: 17%;
-	left: 57%;
+.bouton[data-member-name="jambe"] {
+	top: 18%;
+	left: 156%;
 }
 
-.genou {
+.bouton[data-member-name="genou"] {
 	top: 28%;
-	left: 16%;
+	left: 43%;
 }
 
-.pied {
+.bouton[data-member-name="pied"] {
 	top: 35%;
-	left: 45%;
+	left: 130%;
 }
 
 .description {
-	width: 60%;
+	max-width: 200px;
+	min-width: 50%;
 	border-radius: 10px;
-	margin-left: 15px;
 
 }
 
-.box {
-	height: 450px;
-	padding: 10px;
+.box[data-member-name="epaule"] {
+	background-image: url("../images/epaule.jfif");
 }
 
-.class_epaule:not(.selected) {
-		background-image: url("../images/epaule.jfif");
-	}
+.box[data-member-name="bras"] {
+	background-image: url("../images/bras.gif");
+}
 
-	.class_bras:not(.selected) {
-		background-image: url("../images/bras.gif");
-	}
+.box[data-member-name="main"] {
+	background-image: url("../images/main.jpg");
+}
 
-	.class_main:not(.selected) {
-		background-image: url("../images/main.jpg");
-	}
+.box[data-member-name="jambe"] {
+	background-image: url("../images/jambe.jpg");
+}
 
-	.class_jambe:not(.selected) {
-		background-image: url("../images/jambe.jpg");
-	}
+.box[data-member-name="genou"] {
+	background-image: url("../images/genou.jfif");
+}
 
-	.class_genou:not(.selected) {
-		background-image: url("../images/genou.jfif");
-	}
+.box[data-member-name="pied"] {
+	background-image: url("../images/pied.jpg");
+}
 
-	.class_pied:not(.selected) {
-		background-image: url("../images/pied.jpg");
-	}
+.description .box.selected {
+	background-image: unset;
+}
 
-.title_2 {
+.instructions > .title_2 {
+	font-size: 6vw;
+	padding-top: 10vh;
+}
+
+.instructions > .text {
+	padding-top: 10vh;
+	line-height: 4vh;
 }
 
 .text {
-	height: 95%;
+	height: 90%;
 	margin-top: 10px;
 	overflow-y: scroll;
 	border-radius: 5px;
@@ -130,6 +150,11 @@ body {
 }
 
 @media screen and (min-width: 768px) {
+
+	.description > .box.instructions {
+		display: none;
+	}
+
 	body {
 		background-image: url("../images/background.jpg");
 		background-repeat: no-repeat;
@@ -155,7 +180,7 @@ body {
 	.box:not(.selected) {
 		display: block;
 		opacity: 0.8;
-		box-shadow: 2px 2px 2px orange;
+		box-shadow: 5px 5px 5px inset;
 		background-position: 60%;
 		background-size: cover;
 		background-repeat: no-repeat;
