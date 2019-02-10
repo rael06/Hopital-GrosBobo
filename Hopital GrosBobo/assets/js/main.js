@@ -1,8 +1,8 @@
 "use strict"; // activation du mode strict
 (function() {
 	// ---------------------------VARIABLES--------------------------
-	var screenWidth = document.documentElement.offsetWidth;
 	var audio0 = document.querySelector(".audio_0");
+	var screenWidth = document.documentElement.offsetWidth;
 	var box = document.querySelector(".box");
 	var imageBox = document.querySelector(".image_box");
 	var description = document.querySelector(".description");
@@ -11,8 +11,7 @@
 	function populateBox() {
 		for(let i = 0, len = bodyMembers.length; i < len; i++) {
 
-			imageBox.innerHTML += '\
-				<div class="bouton" data-member-name="' + bodyMembers[i].name + '"></div>';
+			imageBox.innerHTML += '<div class="bouton" data-member-name="' + bodyMembers[i].name + '"></div>';
 
 			description.innerHTML += '\
 				<div class="box" data-member-name="' + bodyMembers[i].name + '">\
@@ -24,25 +23,7 @@
 		}
 	}
 
-	function boxOver() {
-		var membre = this.getAttribute("data-member-name");
-		var box = $(".box");
-		var toSelect = box.filter("[data-member-name='" + membre + "']");
-
-		$(this).addClass("selected");
-		toSelect.addClass("selected");
-	}
-
-	function boxOut() {
-		var membre = this.getAttribute("data-member-name");
-		var box = $(".box");
-		var toSelect = box.filter("[data-member-name='" + membre + "']");
-
-		$(this).removeClass("selected");
-		toSelect.removeClass("selected");
-	}
-
-	function boxClick(e) {
+	function boxClick(event) {
 		var membre = this.getAttribute("data-member-name");
 		var box = $(".box");
 		var toSelect = box.filter("[data-member-name='" + membre + "']");
@@ -51,24 +32,22 @@
 		box.removeClass("selected");
 		$(this).addClass("selected");
 		toSelect.addClass("selected");
-	
-		e.preventDefault();
-		e.stopPropagation();
+
+		event.preventDefault();
+		event.stopPropagation();
 	}
 
 	function boxReset() {
-		if(screenWidth < 768) {
+		if (screenWidth < 768) {
 			$(".instructions").css("display", "block");
-			$(".bouton").removeClass("selected");
-			$(".box").removeClass("selected");
-		} else {
-			$(".instructions").css("display", "none");
-			
 		}
-		
+		else {
+			$(".instructions").css("display", "none");
+		}
+		$(".bouton").removeClass("selected");
+		$(".box").removeClass("selected");
 	}
-	// ------------------------------ APPEL DES FONCTIONS-------------------------
-
+	
 	function initAudioVolumeManager() {
 		if(audio0.paused === false) {
 			audioVolumeUpdate();
@@ -84,46 +63,21 @@
 		audio0.volume =  parseFloat(audio0.getAttribute("volume"));
 	}
 
-	function isMobile() {
-		return !!navigator.userAgent.match(/mobile/i);
-	}
-
-	populateBox();
+	// ------------------------------ APPEL DES FONCTIONS-------------------------
+	
 	initAudioVolumeManager();
 
-	/*
-	if( isMobile() ) {
-		$(".bouton").click(boxClick);
-	} else {
-		$(".bouton").hover(boxOver, boxOut);
-	}*/
+	populateBox();
 
-	$(".bouton").click(function(e) {
-		if(screenWidth < 768) {
-			boxClick.bind(this)(e);
-		}
-	});
 
-	$(window.document).click(function(e) {
+	$(".bouton").click(boxClick);
+
+	$(window.document).click(function() {
 		boxReset();
-	});
-
-	$(".bouton").hover(function() {
-		if(screenWidth >= 768) {
-			boxOver.bind(this)();
-		}
-	}, function() {
-		if(screenWidth >= 768) {
-			boxOut.bind(this)();
-		}
 	})
 
-	window.addEventListener("resize", function(e) {
+	window.addEventListener("resize", function() {
 		screenWidth = document.documentElement.offsetWidth;
-
-		if(screenWidth >= 768) {
-			boxReset();
-		}
-	});
-	
+		boxReset();
+	})
 })()

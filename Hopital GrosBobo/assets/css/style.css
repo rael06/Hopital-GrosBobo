@@ -7,7 +7,7 @@ body {
 	background-image: url("../images/background_mobile.gif");
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: 55%;
+	background-position: 37%;
 }
 
 .container {
@@ -21,8 +21,13 @@ body {
 
 .title_1 {
 	text-align: center;
+	margin: 0 auto;
 	margin-bottom: 40px;
 	margin-top: 30px;
+	background-color: #082129;
+	color: white;
+	border-radius: 20px;
+	width: 65%;
 }
 
 
@@ -41,6 +46,7 @@ body {
 	border-radius: 100%;
 	position: relative;
 	cursor: pointer;
+	transition: 500ms;
 }
 
 .selected {
@@ -50,6 +56,7 @@ body {
 .box {
 	height: 470px;
 	padding: 10px;
+	transition: 500ms;
 }
 
 .box:not(.selected) {
@@ -58,6 +65,12 @@ body {
 
 .box:not(.selected).instructions {
 	display: block;
+	background-color: #082129;
+	color: white;
+	background-image: unset;
+	border-radius: 5%;
+	font-family: 'Cormorant', serif;
+	font-size: 20px;
 }
 
 .bouton.selected {
@@ -97,7 +110,7 @@ body {
 	max-width: 200px;
 	min-width: 50%;
 	border-radius: 10px;
-
+	margin-left: 5px;
 }
 
 .box[data-member-name="epaule"] {
@@ -125,7 +138,12 @@ body {
 }
 
 .description .box.selected {
+	background-color: #082129;
+	color: white;
 	background-image: unset;
+	border-radius: 5%;
+	font-family: 'Cormorant', serif;
+	font-size: 20px;
 }
 
 .instructions > .title_2 {
@@ -149,6 +167,11 @@ body {
 	width: 0;
 }
 
+.footer {
+	height: 220px;
+}
+
+
 @media screen and (min-width: 768px) {
 
 	.description > .box.instructions {
@@ -161,6 +184,27 @@ body {
 		background-size: cover;
 	}
 
+	.title_1 {
+		text-align: center;
+		margin: 30px auto 40px 0;
+		background-color: rgba(0, 0, 0, 0.85);
+		color: orange;
+		width: 50%;
+		border-top-right-radius: 25px;
+		border-bottom-right-radius: 25px;
+		border-radius: 0px 25px 25px 0px;
+	}
+
+	.description .box.selected {
+		background-color: rgba(0, 0, 0, 0.9);
+		background-image: unset;
+		color: orange;
+		border-radius: 5%;
+		font-family: 'Cormorant', serif;
+		font-size: 20px;
+
+	}
+
 	.description {
 		display: flex;
 		flex-direction: row;
@@ -168,6 +212,7 @@ body {
 		justify-content: space-around;
 		align-content: start;
 		height: 500px;
+		min-width: 65%;
 	}
 
 	.box {
@@ -180,16 +225,17 @@ body {
 	.box:not(.selected) {
 		display: block;
 		opacity: 0.8;
-		box-shadow: 5px 5px 5px inset;
+		box-shadow: 0px 0px 2px 5px inset;
 		background-position: 60%;
 		background-size: cover;
 		background-repeat: no-repeat;
 	}
 
+
 	.box.selected {
 		opacity: 1;
 		background-image: unset;
-		box-shadow: 2px 2px 2px black;
+		box-shadow: 0px 0px 4px 6px rgba(121, 77, 13, 0.9);
 	}
 
 	.text {
@@ -199,7 +245,9 @@ body {
 	.box:not(.selected) > .text, .box:not(.selected) > .title_2 {
 		visibility: hidden;
 	}
-
+	.box.selected > .text {
+		overflow: auto;
+	}
 }
 
 
