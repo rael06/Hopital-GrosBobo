@@ -1,5 +1,3 @@
-// création de nos 6 objets incluants deux propriétés : titre et definition
-
 var bodyMembers = [
 	{
 		name: "epaule",

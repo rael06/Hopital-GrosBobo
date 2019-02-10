@@ -2,7 +2,9 @@
 	margin: 0;
 }
 
+/* Screen Size < 768px */
 body {
+	height: 100vh;
 	font-family: 'Arvo', serif;
 	background-image: url("../images/background_mobile.gif");
 	background-repeat: no-repeat;
@@ -10,9 +12,13 @@ body {
 	background-position: 37%;
 }
 
-.container {
+audio {
+    top: 0;
+    height: 3%;
+    position: fixed;
 }
 
+/* Header */
 .content {
 	display: flex;
 	justify-content: center;
@@ -29,8 +35,9 @@ body {
 	border-radius: 20px;
 	width: 65%;
 }
+/* !Header */
 
-
+/* Body Picture Items */
 .image_box {
 	background-image: url("../images/corps.png");
     background-repeat: no-repeat;
@@ -47,30 +54,6 @@ body {
 	position: relative;
 	cursor: pointer;
 	transition: 500ms;
-}
-
-.selected {
-	display: block;
-}
-
-.box {
-	height: 470px;
-	padding: 10px;
-	transition: 500ms;
-}
-
-.box:not(.selected) {
-	display: none;
-}
-
-.box:not(.selected).instructions {
-	display: block;
-	background-color: #082129;
-	color: white;
-	background-image: unset;
-	border-radius: 5%;
-	font-family: 'Cormorant', serif;
-	font-size: 20px;
 }
 
 .bouton.selected {
@@ -106,11 +89,36 @@ body {
 	left: 130%;
 }
 
+.selected {
+	display: block;
+}
+/* ! Body Picture Items */
+
+/* Descriptions */
 .description {
 	max-width: 200px;
 	min-width: 50%;
-	border-radius: 10px;
 	margin-left: 5px;
+	margin-right: 5px;
+}
+.box {
+	height: 470px;
+	padding: 10px;
+	transition: 500ms;
+	border-radius: 5%;
+}
+
+.box:not(.selected) {
+	display: none;
+}
+
+.box:not(.selected).instructions {
+	display: block;
+	background-color: #082129;
+	color: white;
+	background-image: unset;
+	font-family: 'Cormorant', serif;
+	font-size: 20px;
 }
 
 .box[data-member-name="epaule"] {
@@ -137,11 +145,10 @@ body {
 	background-image: url("../images/pied.jpg");
 }
 
-.description .box.selected {
+.box.selected {
 	background-color: #082129;
 	color: white;
 	background-image: unset;
-	border-radius: 5%;
 	font-family: 'Cormorant', serif;
 	font-size: 20px;
 }
@@ -154,6 +161,7 @@ body {
 .instructions > .text {
 	padding-top: 10vh;
 	line-height: 4vh;
+	height: 64%;
 }
 
 .text {
@@ -166,17 +174,10 @@ body {
 .text::-webkit-scrollbar {
 	width: 0;
 }
+/* ! Descriptions */
 
-.footer {
-	height: 220px;
-}
-
-
+/* Screen Size >= 768 */
 @media screen and (min-width: 768px) {
-
-	.description > .box.instructions {
-		display: none;
-	}
 
 	body {
 		background-image: url("../images/background.jpg");
@@ -193,6 +194,10 @@ body {
 		border-top-right-radius: 25px;
 		border-bottom-right-radius: 25px;
 		border-radius: 0px 25px 25px 0px;
+	}
+/* Descriptions */
+	.description > .box.instructions {
+		display: none;
 	}
 
 	.description .box.selected {
@@ -248,7 +253,6 @@ body {
 	.box.selected > .text {
 		overflow: auto;
 	}
+/* ! Descriptions */
 }
 
-
-/* background de la radio de chaque membre qui fade out quand le fade in */
