@@ -2,17 +2,15 @@
 	margin: 0;
 }
 
-html, body {
-	height: 100%;
-}
-
 /* Screen Size < 768px */
 body {
+	height: 97vh;
 	font-family: 'Arvo', serif;
 	background-image: url("../images/background_mobile.gif");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 37%;
+	background-color: #082129;
 }
 
 audio {
@@ -30,6 +28,7 @@ audio {
 
 .title_1 {
 	text-align: center;
+	font-size: 1.8em;
 	margin: 0 auto;
 	margin-bottom: 40px;
 	margin-top: 30px;
@@ -180,12 +179,13 @@ audio {
 /* ! Descriptions */
 
 /* Screen Size >= 768 */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) and (orientation: landscape) {
 
 	body {
 		background-image: url("../images/background.jpg");
 		background-repeat: no-repeat;
 		background-size: cover;
+		min-height: 100vh;
 	}
 
 	.title_1 {
@@ -207,6 +207,7 @@ audio {
 		background-color: rgba(0, 0, 0, 0.9);
 		background-image: unset;
 		color: orange;
+		border-radius: 10px;
 		font-family: 'Cormorant', serif;
 		font-size: 20px;
 
@@ -258,3 +259,8 @@ audio {
 /* ! Descriptions */
 }
 
+@media screen and (max-height: 568px) {
+	body {
+		height: 108vh;
+	}
+}
