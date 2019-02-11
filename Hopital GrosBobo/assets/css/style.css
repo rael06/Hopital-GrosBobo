@@ -2,6 +2,10 @@
 	margin: 0;
 }
 
+html, body {
+	height: 100%;
+}
+
 /* Screen Size < 768px */
 body {
 	font-family: 'Arvo', serif;
@@ -104,7 +108,7 @@ audio {
 	height: 470px;
 	padding: 10px;
 	transition: 500ms;
-	border-radius: 5%;
+	border-radius: 10px;
 }
 
 .box:not(.selected) {
@@ -203,7 +207,6 @@ audio {
 		background-color: rgba(0, 0, 0, 0.9);
 		background-image: unset;
 		color: orange;
-		border-radius: 5%;
 		font-family: 'Cormorant', serif;
 		font-size: 20px;
 
