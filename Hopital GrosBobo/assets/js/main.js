@@ -81,7 +81,8 @@
 
 	window.addEventListener("resize", function(e) {
 		screenWidth = document.documentElement.offsetWidth;
-
+		boxClick.bind(this)(e);
+		
 		if(screenWidth >= 768) {
 			boxReset();
 		}
